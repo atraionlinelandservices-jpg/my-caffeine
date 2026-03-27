@@ -1,0 +1,276 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== FONT FACES ===== */
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/Fraunces.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* Deep forest green primary - Bangladesh inspired */
+    --background: 0.98 0.005 120;
+    --foreground: 0.15 0.02 145;
+
+    --card: 1 0 0;
+    --card-foreground: 0.15 0.02 145;
+
+    --popover: 1 0 0;
+    --popover-foreground: 0.15 0.02 145;
+
+    /* Rich deep green - primary brand color */
+    --primary: 0.32 0.11 155;
+    --primary-foreground: 0.98 0.005 120;
+
+    /* Warm gold accent */
+    --gold: 0.72 0.16 78;
+    --gold-foreground: 0.12 0.04 80;
+
+    --secondary: 0.94 0.015 145;
+    --secondary-foreground: 0.25 0.07 155;
+
+    --muted: 0.95 0.01 120;
+    --muted-foreground: 0.5 0.03 155;
+
+    --accent: 0.94 0.03 145;
+    --accent-foreground: 0.25 0.07 155;
+
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    --border: 0.88 0.015 145;
+    --input: 0.9 0.012 145;
+    --ring: 0.32 0.11 155;
+
+    --chart-1: 0.32 0.11 155;
+    --chart-2: 0.72 0.16 78;
+    --chart-3: 0.55 0.18 25;
+    --chart-4: 0.6 0.14 200;
+    --chart-5: 0.75 0.12 120;
+
+    --sidebar: 0.18 0.06 155;
+    --sidebar-foreground: 0.95 0.02 120;
+    --sidebar-primary: 0.72 0.16 78;
+    --sidebar-primary-foreground: 0.1 0.03 155;
+    --sidebar-accent: 0.25 0.07 155;
+    --sidebar-accent-foreground: 0.95 0.02 120;
+    --sidebar-border: 0.28 0.07 155;
+    --sidebar-ring: 0.72 0.16 78;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ===== CUSTOM UTILITY CLASSES ===== */
+@layer utilities {
+  .text-gold {
+    color: oklch(var(--gold));
+  }
+
+  .bg-gold {
+    background-color: oklch(var(--gold));
+  }
+
+  .border-gold {
+    border-color: oklch(var(--gold));
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Hero: layered vignette that preserves photo while ensuring text contrast */
+  .gradient-hero {
+    background:
+      /* Top fade — very subtle, lets sky show */
+      linear-gradient(
+        to bottom,
+        oklch(0.12 0.06 155 / 0.35) 0%,
+        transparent 30%
+      ),
+      /* Bottom-heavy scrim for search bar legibility */
+      linear-gradient(
+        to top,
+        oklch(0.10 0.06 155 / 0.85) 0%,
+        oklch(0.15 0.07 155 / 0.55) 35%,
+        transparent 65%
+      ),
+      /* Subtle warm-to-cool diagonal tint in the midrange */
+      linear-gradient(
+        125deg,
+        oklch(0.18 0.09 155 / 0.40) 0%,
+        oklch(0.20 0.07 145 / 0.25) 50%,
+        oklch(0.16 0.05 165 / 0.30) 100%
+      );
+  }
+
+  .gradient-card-hover {
+    background: linear-gradient(
+      145deg,
+      oklch(var(--primary) / 0.05),
+      oklch(var(--gold) / 0.03)
+    );
+  }
+
+  .shadow-card {
+    box-shadow:
+      0 1px 3px oklch(0.15 0.05 155 / 0.08),
+      0 4px 16px oklch(0.15 0.05 155 / 0.06);
+  }
+
+  .shadow-card-hover {
+    box-shadow:
+      0 4px 12px oklch(0.15 0.05 155 / 0.12),
+      0 16px 40px oklch(0.15 0.05 155 / 0.1);
+  }
+
+  .gold-badge {
+    background: linear-gradient(135deg, oklch(0.72 0.16 78), oklch(0.65 0.18 68));
+    color: oklch(0.12 0.04 80);
+  }
+
+  .verified-badge {
+    background: linear-gradient(135deg, oklch(0.35 0.12 155), oklch(0.28 0.1 155));
+    color: oklch(0.95 0.02 120);
+  }
+
+  .bengali-heading {
+    font-family: "Fraunces", serif;
+    letter-spacing: -0.02em;
+  }
+
+  /* Section heading treatment — consistent editorial look */
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: oklch(var(--primary) / 0.7);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-label::before {
+    content: "";
+    display: block;
+    width: 1.5rem;
+    height: 2px;
+    background: oklch(var(--gold));
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* Consistent display heading for all major section titles */
+  .section-title {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+    color: oklch(var(--foreground));
+  }
+
+  /* Card hover ring — premium feel */
+  .card-interactive {
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .card-interactive:hover {
+    box-shadow:
+      0 8px 30px oklch(0.15 0.05 155 / 0.12),
+      0 2px 8px oklch(0.15 0.05 155 / 0.07);
+  }
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: oklch(var(--muted));
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(var(--primary) / 0.4);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(var(--primary) / 0.6);
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  /* Hide nav, header, footer, and explicitly marked elements */
+  header,
+  nav,
+  footer,
+  [data-print-hide],
+  .sticky {
+    display: none !important;
+  }
+
+  /* Clean white background */
+  body {
+    background: white !important;
+    color: #111 !important;
+  }
+
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* Force single column layout */
+  .lg\:grid-cols-3 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Images should print cleanly */
+  img {
+    max-width: 100%;
+    page-break-inside: avoid;
+  }
+
+  /* Avoid page breaks inside key sections */
+  .bg-white,
+  .bg-secondary\/40,
+  .bg-blue-50,
+  .bg-emerald-50,
+  .bg-amber-50 {
+    page-break-inside: avoid;
+  }
+}
